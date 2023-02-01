@@ -19,3 +19,44 @@ docker run -d --rm --name keycloak -p 8080:8080 \
 docker logs e99ff2a00d7f9412bf35595a8f6814a6e1d81f4e43a05370a5f4c76f1ac200ff
 ```
 где этот рабор цифр идентификатор контейнера.
+
+# Заметки по работе с БД:
+##### Подсоединиться к БД (порт по умолчанию 5432, но тут в докере он прокинут на 5433)
+psql -h localhost -p 5433 -U postgres
+
+##### Кирилица в терминале
+psql -d mydb -U postgres
+psql \! chcp 1251
+
+CREATE DATABASE mydb;
+DROP DATABASE mydb;
+##### Подсоединиться к БД
+\c mydb
+##### Информация 
+\conninfo
+
+##### CREATE TABLE mew_table (Column name + data type + constraints (if any))
+CREATE TABLE new_table (
+id BIGSERIAL,
+first_name VARCHAR(50),
+last_name VARCHAR(50),
+gender VARCHAR(50),
+data_of_birth DATE
+);
+
+Просмтреть базы данных
+\l
+##### Просмтреть таблицы
+\d
+##### Просмтреть поля таблицы
+\d new_table
+##### Удалить таблицу
+DROP TABLE new_table;
+
+##### Заполняем таблицу
+INSERT INTO new_table (date_of_birth)
+
+VALUES ('200-01-01');
+
+##### Заполнить таблицу с помощью сайта https://www.mockaroo.com/  и импортировать файл
+\i D:/my_table.sql   #слеш должен быть прямой, а не как в windows
